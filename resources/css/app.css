@@ -1,0 +1,45 @@
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import '/node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import 'components/tooltips.css';
+
+/* Valoracion estrellas */
+label{
+    transition: all 0.2s ease;
+}
+
+.rating input:not(:checked) ~ label:hover,
+.rating input:not(:checked) ~ label:hover ~ label{
+    color:rgb(253, 217, 53);
+}
+.rating input::checked ~ label{
+    color:rgb(253, 217, 53);
+}
+
+.rating input#star5:checked ~ label{
+    color:rgb(253, 217, 53);
+    text-shadow: 0 0 20px rgb(253, 205, 45);
+}
+
+.rating input#star4:checked ~ label{
+    color:rgb(253, 217, 53);
+    text-shadow: 0 0 20px rgb(253, 205, 45);
+}
+
+.rating input#star3:checked ~ label{
+    color:rgb(253, 217, 53);
+    text-shadow: 0 0 20px rgb(253, 205, 45);
+}
+.rating input#star2:checked ~ label{
+    color:rgb(253, 217, 53);
+    text-shadow: 0 0 20px rgb(253, 205, 45);
+}
+.rating input#star1:checked ~ label{
+    color:rgb(253, 217, 53);
+    text-shadow: 0 0 20px rgb(253, 205, 45);
+}
