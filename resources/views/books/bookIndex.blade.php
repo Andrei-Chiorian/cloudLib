@@ -6,7 +6,17 @@
 
 @section('contenido')
 
-    <div class="mx-auto px-5 ">
+    <div class="mx-auto px-5 mt-5">
+        <div class="rounded p-3 shadow bg-white mb-3 font-semibold">
+            <a href="{{route('library.index', $library)}}">                
+                <button class="w-fit text-blue-600 hover:text-blue-800 hover:scale-105 flex gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                    </svg> 
+                    Volver a la biblioteca
+                </button>
+            </a>            
+        </div>
         <div class=" rounded p-3 shadow bg-white">
             <div>
                 <div class="flex items-center justify-center">
@@ -61,7 +71,7 @@
                     </div>
                 @if ($book->library->user_id == auth()->user()->id)    
                     <div class="flex gap-2">
-                        <a href="" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2 text-center">Editar</a>
+                        <a href="{{route('book.updateShow', [$library, $book])}}" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2 text-center">Editar</a>
                         <button class="text-center bg-gradient-to-r from-red-400 to-red-600 hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2" data-modal-target="delete-book-modal" data-modal-toggle="delete-book-modal">Eliminar</button>
                         @isset($book->loans)
                             <?php
@@ -72,13 +82,10 @@
                                     }
                                 }
                                 if ($check == 0) {
-                            ?>                                                         
-                                    <form action="{{route('loan.create')}}" method="post" novalidate>
-                                    @csrf
-                                        <input type="hidden" name="name" value="{{$book->name}}">                                        
-                                        <input type="hidden" name="id" value="{{$book->id}}">
-                                        <button type="submit" class="text-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2">Prestar</button>
-                                    </form>
+                            ?>                              
+                                    <a href="{{route('loan.create', [$library, $book])}}">
+                                        <button type="button" class="text-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2">Prestar</button>
+                                    </a>
                             <?php
                                 }
                             ?>                                                 
@@ -193,16 +200,19 @@
                                     </button>
 
                                     <div class="px-6 py-6 lg:px-8">
-                                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Eliminar nota</h3>
+                                        <h3 class="mb-4 text-2xl font-medium text-gray-900 dark:text-white">Eliminar nota</h3>
 
                                         <form class="space-y-6" action="{{route('note.destroy')}}" method="POST">
                                             @method('DELETE')
                                             @csrf
                                             <div>
-                                                <p class="my-auto text-sm font-medium text-gray-900 dark:text-white">Esta seguro que deseas eliminar la nota?</p>                            
+                                                <p class="my-auto font-medium text-gray-900 dark:text-white">Esta seguro que deseas eliminar la nota?</p>                            
                                             </div>                                                                                  
-                                        <input type="hidden" name="id" value="{{$note->id}}"> 
-                                        <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar</button>                        
+                                        <input type="hidden" name="id" value="{{$note->id}}">
+                                        <div class="flex flex-col gap-2">
+                                            <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg py-2.5 text-center uppercase dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar</button>
+                                            <button type="button" class="bg-gradient-to-l from-gray-300 to-gray-400 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-500 transition-colors cursor-pointer uppercase font-bold w-full py-2.5 text-white rounded-lg" data-modal-hide="delete-note-modal">Cancelar</button>
+                                        </div>                       
                                         </form>
                                     </div>
                                 </div>
@@ -230,17 +240,20 @@
                 </button>
 
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Eliminar libro</h3>
+                    <h3 class="mb-4 text-2xl font-medium text-gray-900 dark:text-white">Eliminar libro</h3>
 
                     <form class="space-y-6" action="{{route('book.destroy')}}" method="POST">
                         @method('DELETE')
                         @csrf
                         <div>
-                            <p  class="my-auto text-sm font-medium text-gray-900 dark:text-white"> Si elimina este libro se perderan todos los datos asociados a el como son las notas y prestamos<br><br> Esta seguro que deseas eliminar el libro?</p>                            
+                            <p  class="my-auto font-medium text-gray-900 dark:text-white"> Si elimina este libro se perderan todos los datos asociados a el como son las notas y prestamos<br><br> Esta seguro que deseas eliminar el libro?</p>                            
                         </div>                                                              
-                       <input type="hidden" name="id" value="{{$book->id}}">
-                       <input type="hidden" name="library_id" value="{{$book->library_id}}">
-                        <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar</button>                        
+                        <input type="hidden" name="id" value="{{$book->id}}">
+                        <input type="hidden" name="library_id" value="{{$book->library_id}}">
+                        <div class="flex flex-col gap-2">
+                            <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg py-2.5 text-center uppercase dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Eliminar</button>
+                            <button type="button" class="bg-gradient-to-l from-gray-300 to-gray-400 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-500 transition-colors cursor-pointer uppercase font-bold w-full py-2.5 text-white rounded-lg" data-modal-hide="delete-book-modal">Cancelar</button>
+                        </div>                         
                     </form>
                 </div>
             </div>
@@ -262,16 +275,17 @@
                 </button>
 
                 <div class="px-6 py-6 lg:px-8">
-                    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Crear nota</h3>
+                    <h3 class="mb-4 text-2xl font-medium text-gray-900 dark:text-white">Añade una nota</h3>
                     <form class="space-y-6" action="{{route('note.store')}}" method="POST">                        
                         @csrf
                         <div class="flex gap-3">
-                            <textarea name="text" id="text" cols="60" rows="10" class="border rounde shadow"></textarea>
+                            <textarea name="text" id="text" cols="60" rows="10" class="border rounde shadow" placeholder="Escribe aqui tu nota"></textarea>
                             <input type="hidden" name="id" value="{{$book->id}}">                            
                         </div>                                                              
-                       
-                        <button type="submit" class="w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Guardar</button>
-                        
+                        <div class="flex flex-col gap-2">
+                            <button type="submit" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors cursor-pointer uppercase font-bold w-full py-2.5 text-white rounded-lg">Añadir nota</button>                                          
+                            <button type="button" class="bg-gradient-to-l from-gray-300 to-gray-400 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-500 transition-colors cursor-pointer uppercase font-bold w-full py-2.5 text-white rounded-lg" data-modal-hide="add-note-modal">Cancelar</button>            
+                        </div>
                     </form>
                 </div>
             </div>

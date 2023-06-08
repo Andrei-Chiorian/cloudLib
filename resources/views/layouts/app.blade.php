@@ -3,7 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('titulo')</title>        
+        <title>@yield('titulo')</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicon/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon/favicon-16x16.png')}}">
+        <link rel="manifest" href="{{asset('favicon/site.webmanifest')}}">        
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />        
         @vite('resources/js/app.js')
@@ -61,6 +65,6 @@
         <a href="" class="text-neutral-800 italic hover:text-blue-600 ">Andrei Chiorian</a> 
     </footer>
     
-    <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+    <script src="C:\Users\heavy\OneDrive\Escritorio\cloudLib\node_modules\flowbite\dist\flowbite.min.js"></script>    
     </body>
 </html>

@@ -37,7 +37,7 @@ Route::post('/checkin-prestamo',[LoanController::class, 'checkin'])->name('loan.
 
 Route::get('/crear-biblioteca',[LibraryController::class, 'create'])->name('library.create');
 
-Route::post('/crear-prestamo',[LoanController::class, 'create'])->name('loan.create');
+// Route::get('/{book:name}/crear-prestamo',[LoanController::class, 'create'])->name('loan.create');
 
 Route::get('/editar-perfil',[ProfileController::class, 'index'])->name('profile.index');
 Route::post('/editar-perfil',[ProfileController::class, 'store'])->name('profile.store');
@@ -74,6 +74,12 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/{library:name}',[LibraryController::class, 'index'])->name('library.index');
 
+Route::get('/{library:name}/actualizar-biblioteca',[LibraryController::class, 'updateShow'])->name('library.updateShow');
+
 Route::get('/{library:name}/crear-libro',[BookController::class, 'create'])->name('book.create');
 
 Route::get('/{library:name}/{book:name}',[BookController::class, 'index'])->name('book.index');
+
+Route::get('/{library:name}/{book:name}/actualizar-libro',[BookController::class, 'updateShow'])->name('book.updateShow');
+
+Route::get('/{library:name}/{book:name}/crear-prestamo',[LoanController::class, 'create'])->name('loan.create');

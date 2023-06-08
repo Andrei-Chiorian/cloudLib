@@ -7,6 +7,17 @@ Prestamos &#8226; {{auth()->user()->username}} &#8226; CloudLib
 @section('contenido')
 
     <div class="mx-auto px-5">
+        <div class="rounded p-3 shadow bg-white mb-3">
+            <a href="{{route('home')}}">
+                <button class="w-fit text-blue-600 hover:text-blue-800 hover:scale-105 flex font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
+                    </svg>
+                    Volver a la pagina principal
+                </button>
+            </a>            
+        </div>
+
         <div class=" rounded p-3 shadow bg-white">           
             <div class="font-bold text-xl">
                 PRESTAMOS EN CURSO
@@ -38,9 +49,9 @@ Prestamos &#8226; {{auth()->user()->username}} &#8226; CloudLib
             @foreach ($libraries as $library)
                 @foreach ($library->loans as $loan)                    
                     @if($loan->checkin == null)                                                 
-                        <form id="form1" action="{{route('loan.update.show')}}" method="post">
+                        <form action="{{route('loan.update.show')}}" method="post">
                             @csrf                                  
-                            <button id="sendLoan1" class="flex bg-gray-200 px-1 gap-3 w-full hover:border-1 hover:bg-white hover:border-black text-left" type="button">
+                            <button id="sendLoan1" type="submit" class="flex bg-gray-200 px-1 gap-3 w-full hover:border-1 hover:bg-white hover:border-black text-left" type="button">
                                 <input type="hidden" id="title" name="title" value="{{$loan->book->name}}">                   
                                 <input type="hidden" id="library" name="library" value="{{$loan->book->library->name}}">                         
                                 <input type="hidden" id="id" name="id" value="{{$loan->id}}">                         
@@ -107,9 +118,9 @@ Prestamos &#8226; {{auth()->user()->username}} &#8226; CloudLib
             @foreach ($libraries as $library)
                 @foreach ($library->loans as $loan)                    
                     @if ($loan->checkin != null)
-                        <form id="form2" action="{{route('loan.update.show')}}" method="post">
+                        <form action="{{route('loan.update.show')}}" method="post">
                             @csrf                                  
-                            <button id="sendLoan2" class="flex bg-gray-200 px-1 gap-3 w-full hover:border-1 hover:bg-white hover:border-black text-left" type="button">
+                            <button id="sendLoan2" type="submit" class="flex bg-gray-200 px-1 gap-3 w-full hover:border-1 hover:bg-white hover:border-black text-left" type="button">
                                 <input type="hidden" id="title" name="title" value="{{$loan->book->name}}">                   
                                 <input type="hidden" id="library" name="library" value="{{$loan->book->library->name}}" >                         
                                 <input type="hidden" id="id" name="id" value="{{$loan->id}}">                         

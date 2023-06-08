@@ -7,6 +7,7 @@ use App\Models\Loan;
 use App\Models\User;
 use App\Models\Library;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 
 class LoanController extends Controller
@@ -16,9 +17,8 @@ class LoanController extends Controller
         return view('loans.loanIndex',['libraries'=>$libraries]);
     }    
 
-    public function create(Request $book){ 
-           
-        return view('loans.loan', ['book'=>$book]);
+    public function create(Library $library, Book $book){           
+        return view('loans.loan', ['library'=>$library, 'book'=>$book]);
     }
 
     public function checkin(Request $request){
@@ -29,15 +29,16 @@ class LoanController extends Controller
     }
 
 
-    public function store(Request $request){
-        
+    public function store(Request $request)
+    {
+        //dd($request);
         $this->validate($request, [
             'person'=>'required',
             'checkout'=>'required',
             'checkinPrev'=>'required',            
             'obser'=>'nullable',
             'book_id'=>'required',
-        ]);
+        ]);        
 
         Loan::create([
             'person'=>$request->person,

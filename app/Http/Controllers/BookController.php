@@ -22,6 +22,11 @@ class BookController extends Controller
         return view('books.book',['library'=>$library]);
     }
 
+    public function updateShow(Library $library, Book $book){
+        
+        return view('books.bookUpdate',['library'=>$library, 'book'=>$book]);
+    }
+
     public function store(Request $request){
         
         $this->validate($request, [                       
@@ -91,7 +96,65 @@ class BookController extends Controller
         return redirect()->route('library.index', ['library'=>$library]);
     }
 
-    public function update(){
+    public function update(Request $request){
+
+        $this->validate($request, [                       
+            'name'=>'required',
+            'author'=>'required',
+            'editorial'=>'nullable',
+            'synopsis'=>'nullable',
+            'page_num'=>'nullable',
+            'book_coud'=>'nullable',
+            'obser'=>'nullable',
+            'image'=>'nullable',
+            'image'=>'nullable',             
+            'valoration'=>'nullable',          
+        ]);
+
+        if ($request->image) {
+            $image = $request->file('image');            
+           
+            $nomImage1 = Str::uuid() . "." . $image[0]->extension();            
+            
+            $imgServ1 = Image::make($image[0]);
+            $imgServ1->fit(400,500,);           
+            $imgServ1->orientate();
+
+            $imgPath1 = public_path('books') . '/' . $nomImage1;            
+            $imgServ1->save($imgPath1);                           
+                        
+            if(isset($request->image[1])){
+                $nomImage2 = Str::uuid() . "." . $image[1]->extension();
+                $imgServ2 = Image::make($image[1]);
+                $imgServ2->fit(400,500,);
+                $imgServ2->orientate();
+                $imgPath2 = public_path('books') . '/' . $nomImage2;
+                $imgServ2->save($imgPath2);  
+            }else{
+                $nomImage2 = null;  
+            }
+
+        }else{
+            $nomImage1 = null;
+            $nomImage2 = null; 
+        }
+
+        $book = Book::find($request->id);
+        $book->name = $request->name;
+        $book->author = $request->author;
+        $book->editorial = $request->editorial;
+        $book->synopsis = $request->synopsis;
+        $book->page_num = $request->page_num;
+        $book->book_cond = $request->book_cond;
+        $book->obser = $request->obser;
+        //Se comprueba si hay nuevo nombre de imagen en caso contrario se pone la vieja si tampoco la hay se pone null        
+        $book->image = $nomImagen1 ?? $book->image ?? null;
+        $book->image2 = $nomImagen2 ?? $book->image ?? null;
+        $book->valoration = $request->star;        
+        $book->save();
+
+        $library = Library::find($book->library_id);
         
+        return redirect()->route('book.index', [$library, $book]);
     }
 }

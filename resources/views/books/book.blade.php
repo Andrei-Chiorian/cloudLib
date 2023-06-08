@@ -89,7 +89,7 @@
                 <div class="mb-5">                    
                     <div class="mb-2 block uppercase text-gray-600 font-bold">Valoracion</div>
                     <div class="mb-5 text-gray-500">
-                        <p>Por ultimo puntua el libro segun tu opinion</p>
+                        <p>Por ultimo añade una valoracion para el libro</p>
                     </div>
                     <div class="rating flex flex-row-reverse justify-end gap-2">                    
                         <input type="radio" id="star5" name="star" value="5" class="hidden"/>
@@ -110,7 +110,11 @@
                 
                 <input type="hidden" name="library" value="{{$library->id}}">
 
-                <input type="submit" value="Añadir Libro" class="bg-sky-600 hover:bg-sky-700 mt-5 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
+                <input type="submit" value="Añadir Libro" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
+
+                <a href="{{route('library.index', $library)}}">                    
+                    <button type="button" class="mt-2 bg-gradient-to-l from-gray-300 to-gray-400 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-500 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">Cancelar</button>
+                </a>
             </form>
         </div>
     </div>

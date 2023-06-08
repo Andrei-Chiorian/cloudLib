@@ -8,11 +8,11 @@
     <div class="md:flex justify-center mt-10 md:gap-4 md:items-center ">
              
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
-            <form action="{{ route('loan.store') }}" method="POST" novalidate>
+            <form action="{{route('loan.store')}}" method="POST" novalidate>
                 @csrf                
                 <div class="mb-5">
                     <label for="libro" class="mb-2 block uppercase text-gray-600 font-bold">Libro</label>
-                    <input type="text" id="libro" name="libro" value="{{$book->name}}" class="border p-3 w-full rounded-lg @error('libro') border-red-500 @enderror" disabled/>
+                    <input type="text" id="libro" name="libro" value="{{$book->name}}" class="disabled:bg-gray-50 disabled:border-gray-200 border p-3 w-full rounded-lg @error('libro') border-red-500 @enderror" disabled/>
                     @error('libro')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
@@ -20,7 +20,7 @@
 
                 <div class="mb-5 ">
                     <label for="person" class="mb-2 block uppercase text-gray-600 font-bold">Persona</label>
-                    <input id="person" name="person" placeholder="Prestatario" value="{{old('person')}}" class="border p-3 w-full rounded-lg @error('person') border-red-500 @enderror"/>                    
+                    <input id="person" name="person" placeholder="Añadir Prestatario" value="{{old('person')}}" class="border p-3 w-full rounded-lg @error('person') border-red-500 @enderror"/>                    
                     @error('person')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
@@ -50,7 +50,10 @@
                     @enderror
                 </div>                                              
                 <input type="hidden" name="book_id" value="{{$book->id}}">
-                <input type="submit" value="Crear Prestamo" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
+                <input type="submit" value="Añadir Prestamo" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">
+                <a href="{{route('book.index', ['library'=>$library, 'book'=>$book])}}">                    
+                    <button type="button" class="mt-2 bg-gradient-to-l from-gray-300 to-gray-400 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-500 transition-colors cursor-pointer uppercase font-bold w-full p-3 text-white rounded-lg">Cancelar</button>
+                </a>
             </form>
         </div>
     </div>

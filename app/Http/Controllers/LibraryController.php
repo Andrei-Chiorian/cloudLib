@@ -17,6 +17,11 @@ class LibraryController extends Controller
         return view('libraries.library');
     }
 
+    public function updateShow(Library $library){
+        
+        return view('libraries.libraryUpdate', ['library'=>$library]);
+    }
+
     public function store(Request $request){
         $this->validate($request, [                       
             'name'=>'required',
@@ -41,7 +46,23 @@ class LibraryController extends Controller
         return redirect()->route('home');
     }
 
-    public function update(){
+    public function update(Request $request){
+        
+        $this->validate($request, [                       
+            'name'=>'required',
+            'desc'=>'nullable',
+            'start_date'=>'required',
+            'state'=>'required',
+        ]);
+
+        $library = Library::find($request->id);
+        $library->name = $request->name;
+        $library->desc = $request->desc;
+        $library->start_date = $request->start_date;
+        $library->state = $request->state;            
+        $library->save();
+        
+        return redirect()->route('library.index', $library);
         
     }
 }
