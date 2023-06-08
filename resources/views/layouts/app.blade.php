@@ -13,7 +13,7 @@
         @vite('resources/js/app.js')
         @vite('resources/css/app.css')
     </head>
-    <body class="antialiased bg-gray-100">
+    <body class="antialiased bg-black">
         @if ($_SERVER["REQUEST_URI"] != '/login' && $_SERVER["REQUEST_URI"] != '/register')
             <header class="p-5 border-b bg-white shadow ">
                 <div class="container mx-auto px-10 flex justify-between items-center">
@@ -59,10 +59,10 @@
         @yield('contenido')
     </main>
 
-    <footer class="text-center  p-5 text-gray-500 font-bold uppercase mt-10">
+    <footer class="text-center  p-5 text-gray-50 font-bold uppercase mt-10">
         CloudLib - Todos los derechos reservados {{now()->year}} <br>        
         Proyecto desarrollado por <br>
-        <a href="" class="text-neutral-800 italic hover:text-blue-600 ">Andrei Chiorian</a> 
+        <a href="" class="text-white italic hover:text-blue-600 ">Andrei Chiorian</a> 
     </footer>
     
     <script src="C:\Users\heavy\OneDrive\Escritorio\cloudLib\node_modules\flowbite\dist\flowbite.min.js"></script>    

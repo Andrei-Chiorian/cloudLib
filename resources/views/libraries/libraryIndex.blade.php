@@ -16,8 +16,8 @@
                 </button>
             </a>
         </div>
-        <div class="rounded p-3 shadow bg-white mb-3 font-semibold">
-            <div class="flex flex-col justify-center items-center w-96 mx-auto gap-3 my-10">
+        <div class="rounded bg-i p-3 shadow bg-cover mb-3 font-semibold"  style="background-image: url('/img/backgroundLib.jpg'); height: 400px">
+            <div class="flex flex-col justify-center items-center w-96 mx-auto gap-3 my-10 bg-slate-600 bg-opacity-50 rounded-xl text-white">
                 <div class="text-2xl font-bold">
                     Biblioteca {{$library->name}}
                 </div>
@@ -79,16 +79,16 @@
                     @endauth
                 </div>
                 <div class="text-center font-semibold">
-                    <p class=" text-xl text-gray-500">Descripcion</p>
+                    <p class=" text-xl text-white">Descripcion</p>
                     <p>{{$library->desc}}</p>            
                 </div>
                 <div class="text-center font-semibold">
-                    <p class=" text-xl text-gray-500">Creada por <span class="text-black">{{$library->user->username}}</span> el dia</p>
+                    <p class=" text-xl text-white">Creada por <span class="text-slate-50">{{$library->user->username}}</span> el dia</p>
                     <p>{{$library->start_date}}</p>
                     
                 </div>
                 @auth
-                <div class="text-gray-500 font-semibold">
+                <div class="text-white font-semibold">
                     @if ($library->state == 'on')
                         Esta biblioteca es publica
                     @else

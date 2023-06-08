@@ -36,7 +36,7 @@
 
                 <div class="mb-5 ">
                     <label for="synopsis" class="mb-2 block uppercase text-gray-600 font-bold">Sinopsis</label>                    
-                    <textarea id="synopsis" name="synopsis" placeholder="Introduce la sinopsis" class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror">{{old('synopsis')}}</textarea>                    
+                    <textarea id="synopsis" name="synopsis" rows="9" placeholder="Introduce la sinopsis" class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror">{{old('synopsis')}}</textarea>                    
                     @error('synopsis')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }}</p>
                     @enderror
