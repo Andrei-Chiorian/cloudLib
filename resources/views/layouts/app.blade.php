@@ -13,15 +13,15 @@
         @vite('resources/js/app.js')
         @vite('resources/css/app.css')
     </head>
-    <body class="antialiased bg-black">
+    <body class="antialiased bg-gray-800">
         @if ($_SERVER["REQUEST_URI"] != '/login' && $_SERVER["REQUEST_URI"] != '/register')
-            <header class="p-5 border-b bg-white shadow ">
+            <header class="p-5 border-b-2 bg-opacity-40 shadow ">
                 <div class="container mx-auto px-10 flex justify-between items-center">
-                <h1 class="text-3xl font-black fa-solid fa-flip" style="--fa-animation-duration: 3s; --fa-animation-iteration-count: 1;"><a href="{{route('home')}}">CloudLib</a></h1>
+                <h1 class="text-3xl text-white font-black fa-solid fa-flip" style="--fa-animation-duration: 3s; --fa-animation-iteration-count: 1;"><a href="{{route('home')}}">CloudLib</a></h1>
                     @auth
                     <nav class="flex gap-2 items-center">                                     
 
-                        <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="font-medium hover:text-gray-600 text-lg text-center inline-flex items-center " type="button">{{auth()->user()->username}}</button>
+                        <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" class="font-medium text-white hover:scale-105 text-lg text-center inline-flex items-center " type="button">{{auth()->user()->username}}</button>
 
                         <!-- Dropdown menu -->
                         <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">

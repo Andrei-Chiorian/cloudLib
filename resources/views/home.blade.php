@@ -9,17 +9,19 @@
 @section('contenido')
 @auth
     <div class="mx-auto px-5">
-        <div class="rounded p-3 shadow bg-white mb-3 flex gap-1 font-semibold text-blue-600">
+        <div class="rounded p-3 shadow bg-white bg-opacity-40 mb-3 flex gap-1 font-semibold text-blue-950">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
               
             Pagina principal            
         </div>
-        <div class="flex gap-5 justify-center">
-            <div class="w-2/3 rounded p-3 shadow bg-white mb-3 ">
+        <div class="bg-fixed bg-cover" style="background-image: url('/img/home.jpg'); height: 350px">
+        </div>
+        <div class="flex gap-5 justify-center mt-7">
+            <div class="w-2/3 rounded p-3 shadow bg-white bg-opacity-5 mb-3 ">                
                 <div class="overflow-y-scroll scrollbar-hide max-h-screen min-h-screen">
-                    <div class="text-center font-bold text-2xl">
+                    <div class="text-center font-bold text-2xl text-white">
                         Bibliotecas de {{auth()->user()->username}}
                     </div>
                     
@@ -28,7 +30,7 @@
                             <a class="cursor-pointer text-center" href="{{route('library.create')}}">
                                 <div class="hover:shadow-black hover:shadow-lg hover:scale-105 border-4 rounded-lg flex items-center justify-center">                            
                                     <div class="w-full">                         
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto h-36">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="mx-auto h-36">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
                                         </svg>                
                                         <p class="font-semibold text-xl bg-neutral-200">Añadir Biblioteca</p>                                                       
@@ -58,15 +60,15 @@
                     </div>                                 
                 </div>
             </div>
-            <div class="w-1/3 overflow-y-auto scrollbar-hide rounded p-3 shadow bg-white mb-3 ">
-                <div class=" text-center p-1 text-lg font-medium text-gray-600">
+            <div class="w-1/3 overflow-y-auto scrollbar-hide rounded p-3 shadow bg-white bg-opacity-5 mb-3 ">
+                <div class=" text-center p-1 text-lg font-medium text-white">
                     Descubre Bibliotecas
-                    <hr class="mt-5 border-1 border-gray-800 mx-7">
+                    <hr class="mt-5 border-1 border-white mx-7">
                     <div class="mt-5" >                
                         @foreach ($allLibraries as $library)
                             @if($library->state == 'on')
                                 <a href="{{route('library.index', ['library'=>$library])}}">
-                                    <div class="flex w-full items-center gap-1">
+                                    <div class="flex w-full items-center gap-1 text-white">
                                         <div class="font-bold">
                                             {{$library->name}}
                                         </div>

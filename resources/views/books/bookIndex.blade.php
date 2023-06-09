@@ -7,9 +7,9 @@
 @section('contenido')
 
     <div class="mx-auto px-5 mt-5">
-        <div class="rounded p-3 shadow bg-white mb-3 font-semibold">
+        <div class="rounded p-3 shadow bg-white bg-opacity-40 mb-3 font-semibold">
             <a href="{{route('library.index', $library)}}">                
-                <button class="w-fit text-blue-600 hover:text-blue-800 hover:scale-105 flex gap-1">
+                <button class="w-fit text-blue-950 hover:text-blue-800 hover:scale-105 flex gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="blue" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75" />
                     </svg> 
@@ -17,96 +17,96 @@
                 </button>
             </a>            
         </div>
-        <div class=" rounded p-3 shadow bg-white">
-            <div>
-                <div class="flex items-center justify-center">
-                    <img class="shadow-2xl rounded-md border-black h-64" src="{{asset('books') . '/' . $book->image}}" alt="Imagen del post {{$book->image}}">
-                </div>
-                <div class="mt-5 flex-col flex justify-center items-center">
-                    <div class="font-bold text-2xl text-center">        
-                        {{$book->name}}                
-                    </div>
-                    <div class="flex gap-1 mt-3 font-bold text-2xl justify-center">        
-                        @if ($book->valoration == 5)
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                        @elseif ($book->valoration == 4)
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-gray-200"></p>
         
-                        @elseif ($book->valoration == 3)
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-        
-                        @elseif ($book->valoration == 2)
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-        
-                        @elseif ($book->valoration == 1)
-                            <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-        
-                        @elseif ($book->valoration == null)
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>
-                            <p class="fas fa-star text-gray-200"></p>                            
-                        @endif          
-                    </div>
-                @if ($book->library->user_id == auth()->user()->id)    
-                    <div class="flex gap-2">
-                        <a href="{{route('book.updateShow', [$library, $book])}}" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2 text-center">Editar</a>
-                        <button class="text-center bg-gradient-to-r from-red-400 to-red-600 hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2" data-modal-target="delete-book-modal" data-modal-toggle="delete-book-modal">Eliminar</button>
-                        @isset($book->loans)
-                            <?php
-                                $check = 0;
-                                foreach ($book->loans as $loan) {
-                                    if ($loan->checkin == null) {                                        
-                                        $check++;
-                                    }
-                                }
-                                if ($check == 0) {
-                            ?>                              
-                                    <a href="{{route('loan.create', [$library, $book])}}">
-                                        <button type="button" class="text-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2">Prestar</button>
-                                    </a>
-                            <?php
-                                }
-                            ?>                                                 
-                        @endisset 
-                    </div>
-                    @isset($book->loans)
-                        @foreach ($book->loans as $loan)
-                            @if($loan->checkin == null)
-                                <div class="font-semibold text-lg text-red-700">
-                                    Prestado
-                                </div>
-                                @break                   
-                            @endif
-                        @endforeach                        
-                    @endisset
-                @endif
-                </div>
+        <div class="my-5 w-full bg-fixed bg-cover" style="background-image: url('/img/book.jpeg'); height: 400px">
+            <div class="flex items-center justify-center">
+                <img class="shadow-2xl rounded-md border-black h-64" src="{{asset('books') . '/' . $book->image}}" alt="Imagen del post {{$book->image}}">
             </div>
+            <div class="mt-5 flex-col flex justify-center items-center">
+                <div class="font-bold text-2xl text-center text-white">        
+                    {{$book->name}}                
+                </div>
+                <div class="flex gap-1 mt-3 font-bold text-2xl justify-center">        
+                    @if ($book->valoration == 5)
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                    @elseif ($book->valoration == 4)
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+    
+                    @elseif ($book->valoration == 3)
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+    
+                    @elseif ($book->valoration == 2)
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+    
+                    @elseif ($book->valoration == 1)
+                        <p class="fas fa-star text-yellow-300 [text-shadow:_0_2px_0_rgb(202_138_4/_60%)]"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+    
+                    @elseif ($book->valoration == null)
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>
+                        <p class="fas fa-star text-gray-200"></p>                            
+                    @endif          
+                </div>
+            @if ($book->library->user_id == auth()->user()->id)    
+                <div class="flex gap-2">
+                    <a href="{{route('book.updateShow', [$library, $book])}}" class="bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2 text-center">Editar</a>
+                    <button class="text-center bg-gradient-to-r from-red-400 to-red-600 hover:bg-gradient-to-r hover:from-red-500 hover:to-red-700 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2" data-modal-target="delete-book-modal" data-modal-toggle="delete-book-modal">Eliminar</button>
+                    @isset($book->loans)
+                        <?php
+                            $check = 0;
+                            foreach ($book->loans as $loan) {
+                                if ($loan->checkin == null) {                                        
+                                    $check++;
+                                }
+                            }
+                            if ($check == 0) {
+                        ?>                              
+                                <a href="{{route('loan.create', [$library, $book])}}">
+                                    <button type="button" class="text-center bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 transition-colors text-white font-semibold rounded shadow border mt-4 w-20 px-2">Prestar</button>
+                                </a>
+                        <?php
+                            }
+                        ?>                                                 
+                    @endisset 
+                </div>
+                @isset($book->loans)
+                    @foreach ($book->loans as $loan)
+                        @if($loan->checkin == null)
+                            <div class="font-semibold text-lg text-red-700">
+                                Prestado
+                            </div>
+                            @break                   
+                        @endif
+                    @endforeach                        
+                @endisset
+            @endif
+            </div>
+        </div>
 
-            
-            <div class="flex gap-10 mt-10">
+        <div class=" rounded p-3 shadow bg-white bg-opacity-5">    
+            <div class="flex gap-10 mt-10 text-white">
                 <div class="flex gap-2 items-center">
                     <p class="font-semibold text-lg">
                         Autor: 
@@ -133,7 +133,7 @@
                 </div>               
             </div>
 
-            <div class="grid-cols-2 mt-6 gap-3 items-center">
+            <div class="grid-cols-2 mt-6 gap-3 items-center text-white">
                 <div class="font-semibold text-lg">
                     Sinopsis:
                 </div>
@@ -142,7 +142,7 @@
                 </p>
             </div>
 
-            <div class="flex mt-6 gap-3 items-center">
+            <div class="flex mt-6 gap-3 items-center text-white">
                 <div class="font-semibold text-lg">
                     Estado del libro:
                 </div>
@@ -151,7 +151,7 @@
                 </p>                
             </div>
 
-            <div class="grid-cols-2 mt-3 gap-3 items-center">
+            <div class="grid-cols-2 mt-3 gap-3 items-center text-white">
                 <div class="font-semibold text-base">
                     Observaciones:
                 </div>
@@ -160,7 +160,7 @@
                 </p>                
             </div>         
             @if ($book->library->user_id == auth()->user()->id) 
-                <div class="grid-cols-2 mt-3 gap-3 items-center">
+                <div class="grid-cols-2 mt-3 gap-3 items-center text-white">
                     
                     <div class="font-semibold text-lg">
                         Notas

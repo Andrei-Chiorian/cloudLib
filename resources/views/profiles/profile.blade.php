@@ -7,7 +7,7 @@
 @section('contenido')
     <div class="md:flex justify-center mt-10 md:gap-4 md:items-center ">
              
-        <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
+        <div class="md:w-4/12 bg-white  p-6 rounded-lg shadow-xl">
             <form action="{{ route('profile.store') }}" method="POST" novalidate>
                 @csrf
                 <div class="mb-5">

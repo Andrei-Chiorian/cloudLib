@@ -11,7 +11,7 @@ Registro &#8226; MokshaBook
             <img src="{{ asset('img/register.jpg')}}" alt="Imagen registro de usuarios">
         </div>
         <div class="md:w-4/12">
-            <div class=" bg-white p-6 rounded-lg shadow-xl">
+            <div class=" bg-white  p-6 rounded-lg shadow-xl">
                 <form action="{{ route('register') }}" method="POST" novalidate>
                     @csrf
                     <div class="mb-5 block uppercase text-gray-400 font-bold text-center">

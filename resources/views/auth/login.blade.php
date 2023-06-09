@@ -7,7 +7,7 @@
 <div class="md:flex justify-center mt-10 md:gap-4 md:items-center ">
        
     <div class="md:w-6/12 p-5">
-        <img src="{{ asset('img/login.jpg')}}" alt="Imagen login de usuarios">
+        <img src="{{ asset('img/register.jpg')}}" alt="Imagen login de usuarios">
     </div>
    
     <div class="md:w-4/12 p-6 ">
